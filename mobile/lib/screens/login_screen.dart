@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:city_path/screens/home_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   final TextEditingController _emailOrPhoneController = TextEditingController();
@@ -13,7 +14,8 @@ class LoginScreen extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Image.asset('assets/logo.png', width: 120),
+                // Logo with larger size
+                Image.asset('assets/logo.png', width: 160),
                 const SizedBox(height: 40),
                 TextField(
                   controller: _emailOrPhoneController,
@@ -31,13 +33,11 @@ class LoginScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (_) => const Placeholder(),
-                      ), // נחליף בהמשך
+                      MaterialPageRoute(builder: (_) => const HomeScreen()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.teal,
+                    backgroundColor: const Color(0xFF004d71), // Button color
                     padding: const EdgeInsets.symmetric(
                       horizontal: 32,
                       vertical: 12,
@@ -46,7 +46,13 @@ class LoginScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  child: const Text('log in', style: TextStyle(fontSize: 18)),
+                  child: const Text(
+                    'log in',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Color(0xFFF9F2E9), // Text color = background color
+                    ),
+                  ),
                 ),
               ],
             ),
