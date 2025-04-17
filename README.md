@@ -1,4 +1,4 @@
-# city_path
+# city_paths
 
 A new Flutter project.
 
