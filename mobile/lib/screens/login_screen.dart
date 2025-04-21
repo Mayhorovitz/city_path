@@ -14,7 +14,7 @@ class LoginScreen extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                // Logo with larger size
+                // Logo
                 Image.asset('assets/logo.png', width: 160),
                 const SizedBox(height: 40),
                 TextField(
@@ -50,7 +50,7 @@ class LoginScreen extends StatelessWidget {
                     'log in',
                     style: TextStyle(
                       fontSize: 18,
-                      color: Color(0xFFF9F2E9), // Text color = background color
+                      color: Color(0xFFF9F2E9), 
                     ),
                   ),
                 ),
