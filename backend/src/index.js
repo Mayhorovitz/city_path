@@ -17,6 +17,9 @@ app.use("/api/auth", authRoutes);
 const layerRoutes = require("./routes/layerRoutes");
 app.use("/api/layers", layerRoutes);
 
+const routeRoutes = require("./routes/routeRoutes");
+app.use("/api/routes", routeRoutes);
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
