@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:city_path/screens/home_screen.dart';
+import 'package:city_path/services/auth_service.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailOrPhoneController = TextEditingController();
 
   @override
@@ -30,14 +36,38 @@ class LoginScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => const HomeScreen()),
+                  onPressed: () async {
+                    final input = _emailOrPhoneController.text.trim();
+
+                    if (input.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text("Please enter phone or email"),
+                        ),
+                      );
+                      return;
+                    }
+
+                    final success = await AuthService.sendRegisterRequest(
+                      input,
                     );
+
+                    if (success) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text("Verification code sent!"),
+                        ),
+                      );
+
+                      // TODO: Navigate to VerifyCodeScreen
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text("Error sending code")),
+                      );
+                    }
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF004d71), =
+                    backgroundColor: const Color(0xFF004d71),
                     padding: const EdgeInsets.symmetric(
                       horizontal: 32,
                       vertical: 12,
@@ -48,10 +78,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   child: const Text(
                     'log in',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Color(0xFFF9F2E9), 
-                    ),
+                    style: TextStyle(fontSize: 18, color: Color(0xFFF9F2E9)),
                   ),
                 ),
               ],
