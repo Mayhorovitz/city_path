@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:city_path/screens/home_screen.dart';
 import 'package:city_path/services/auth_service.dart';
+import 'package:city_path/screens/verify_code_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -36,6 +37,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 20),
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF004d71),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 32,
+                      vertical: 12,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
                   onPressed: () async {
                     final input = _emailOrPhoneController.text.trim();
 
@@ -59,25 +70,20 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       );
 
-                      // TODO: Navigate to VerifyCodeScreen
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => VerifyCodeScreen(phoneOrEmail: input),
+                        ),
+                      );
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text("Error sending code")),
                       );
                     }
                   },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF004d71),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 32,
-                      vertical: 12,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
                   child: const Text(
-                    'log in',
+                    'Log in',
                     style: TextStyle(fontSize: 18, color: Color(0xFFF9F2E9)),
                   ),
                 ),

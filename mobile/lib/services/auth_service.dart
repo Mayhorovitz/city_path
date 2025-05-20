@@ -22,4 +22,18 @@ class AuthService {
       return false;
     }
   }
+
+  static Future<bool> verifyCode(String phoneOrEmail, String code) async {
+    final url = Uri.parse('$baseUrl/api/auth/verify');
+
+    final body = {"phone": phoneOrEmail, "code": code};
+
+    final response = await http.post(
+      url,
+      headers: {"Content-Type": "application/json"},
+      body: jsonEncode(body),
+    );
+
+    return response.statusCode == 200;
+  }
 }
