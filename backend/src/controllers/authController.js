@@ -62,7 +62,7 @@ const verifyCode = async (req, res) => {
     }
 
     if (storedCode === code.toString()) {
-      // ✅ Update user: set verified = true and remove code from preferences
+      // Update user: set verified = true and remove code from preferences
       await pool.query(
         `
           UPDATE users
